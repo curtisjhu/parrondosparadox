@@ -1,45 +1,40 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const chart_js_1 = require("chart.js");
-class GameA {
+const Game_1 = __importDefault(require("./Game"));
+class GameA extends Game_1.default {
     constructor() {
+        super();
         this.e = 1 / 30;
         this.probability = 1 / 2 - this.e;
-        this.score = 0;
-        this.dataSet = [0];
-        this.gameNumber = 0;
-        this.data = {
-            labels: [...Array(this.gameNumber).keys()],
-            datasets: [
-                {
-                    label: "Game A",
-                    data: this.dataSet,
-                    fill: false,
-                    borderColor: "rgb(75, 192, 192)",
-                    tension: 0.1,
-                },
-            ],
-        };
     }
-    playOnce() {
-        this.gameNumber++;
+    play() {
         var num;
         if (Math.random() < this.probability)
             num = 1;
         else
             num = -1;
         this.score += num;
-        this.dataSet.push(this.score);
-        console.log(num);
-        return num;
+        this.data.push(this.score);
+        return this.score;
     }
-    graph() {
-        var config = {
-            type: "line",
+    playMultiple(n) {
+        while (n--) {
+            this.play();
+        }
+        return this.score;
+    }
+    getDataConfig() {
+        const cfg = {
+            label: "Game A",
+            fill: true,
+            borderColor: "rgb(72, 192, 192)",
+            tension: "0.1",
             data: this.data
         };
-        const ctx = document.getElementById("GameA");
-        const chart = new chart_js_1.Chart(ctx, config);
+        return cfg;
     }
 }
 exports.default = GameA;

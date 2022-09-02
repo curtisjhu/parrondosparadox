@@ -1,57 +1,40 @@
 // @ts-check
-import {Chart} from "chart.js"
+import Game, { DataConfig } from "./Game";
 
-class GameA {
-  probability: number;
-  score: number;
-  e: number;
-  private gameNumber: number;
-  private data: Object;
-  private dataSet: number[];
-
+class GameA extends Game {
   constructor() {
+    super();
     this.e = 1 / 30;
     this.probability = 1 / 2 - this.e;
-    this.score = 0;
-    this.dataSet = [0];
-    this.gameNumber = 0;
-    this.data = {
-      labels: [...Array(this.gameNumber).keys()],
-      datasets: [
-        {
-          label: "Game A",
-          data: this.dataSet,
-          fill: false,
-          borderColor: "rgb(75, 192, 192)",
-          tension: 0.1,
-        },
-      ],
-    };
   }
 
-  playOnce(): number {
-    this.gameNumber++;
-    var num;
+  play(): number {
+    var num: number;
     if (Math.random() < this.probability) num = 1;
     else num = -1;
 
     this.score += num;
-	this.dataSet.push(this.score)
+    this.data.push(this.score);
 
-	console.log(num)
-    return num;
+    return this.score;
   }
 
-  graph() {
-    var config: any = {
-      type: "line",
-	  data: this.data
-    };
+  playMultiple(n: number): number {
+	while(n--){
+		this.play()
+	}
+	return this.score;
+  }
 
-	// canvas for GameA must have id "GameA"
-	const ctx = document.getElementById("GameA") as HTMLCanvasElement;
-	const chart = new Chart(ctx, config)
-
+  getDataConfig(): DataConfig {
+	const cfg: DataConfig = {
+		label: "Game A",
+		fill: true,
+		borderColor: "rgb(72, 192, 192)",
+		tension: "0.1",
+		data: this.data
+	}
+	return cfg;
   }
 }
 
