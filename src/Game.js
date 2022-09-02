@@ -5,5 +5,8 @@ class Game {
         this.score = 0;
         this.data = [0];
     }
+    getScore() {
+        return this.score;
+    }
 }
 exports.default = Game;

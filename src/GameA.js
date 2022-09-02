@@ -18,7 +18,7 @@ class GameA extends Game_1.default {
             num = -1;
         this.score += num;
         this.data.push(this.score);
-        return this.score;
+        return num;
     }
     playMultiple(n) {
         while (n--) {
@@ -32,7 +32,7 @@ class GameA extends Game_1.default {
             fill: true,
             borderColor: "rgb(72, 192, 192)",
             tension: "0.1",
-            data: this.data
+            data: this.data,
         };
         return cfg;
     }

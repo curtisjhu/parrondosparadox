@@ -1,12 +1,13 @@
 class Game {
-  public probability: number;
-  public e: number;
   public score: number;
   protected data: number[];
 
   constructor() {
     this.score = 0;
     this.data = [0];
+  }
+  public getScore(){
+    return this.score;
   }
 }
 

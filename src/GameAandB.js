@@ -4,26 +4,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Game_1 = __importDefault(require("./Game"));
-class GameB extends Game_1.default {
+const GameA_1 = __importDefault(require("./GameA"));
+const GameB_1 = __importDefault(require("./GameB"));
+class GameAandB extends Game_1.default {
     constructor() {
         super();
-        this.e = 1 / 32;
-        this.prob1 = 1 / 10 - this.e;
-        this.prob2 = 3 / 4 - this.e;
+        this.probability = 0.5;
+        this.gameA = new GameA_1.default();
+        this.gameB = new GameB_1.default();
     }
     play() {
         var num;
-        if (this.score % 3 == 0) {
-            if (Math.random() < this.prob1)
-                num = 1;
-            else
-                num = -1;
+        if (Math.random() < this.probability) {
+            num = this.gameA.play();
         }
         else {
-            if (Math.random() < this.prob2)
-                num = 1;
-            else
-                num = -1;
+            num = this.gameB.play();
         }
         this.score += num;
         this.data.push(this.score);
@@ -36,13 +32,14 @@ class GameB extends Game_1.default {
         return this.score;
     }
     getDataConfig() {
-        return {
-            label: "Game B",
-            data: this.data,
+        const cfg = {
+            label: "Game A and B",
             fill: true,
-            borderColor: "rgb(192, 192, 72)",
+            borderColor: "rgb(192, 72, 192)",
             tension: "0.1",
+            data: this.data,
         };
+        return cfg;
     }
 }
-exports.default = GameB;
+exports.default = GameAandB;

@@ -1,29 +1,38 @@
 // @ts-check
 import GameA from "./GameA";
+import GameAandB from "./GameAandB";
+import GameB from "./GameB";
 import Graph from "./graph";
+import { loop } from "./loop";
+import htmltGameSetup from "./htmlGame";
 
-var ga: GameA, g: Graph;
+var ga: GameA, gb: GameB, gab: GameAandB, g: Graph;
 
-function setup(): void {
-	ga = new GameA();
-	g = new Graph();
-    ga.playMultiple(10);
-    g.createChart(ga.getDataConfig());
+export function setup(): void {
+    htmltGameSetup();
+    
+    ga = new GameA();
+    g = new Graph();
+	gb = new GameB();
+    gab = new GameAandB();
+
+    ga.playMultiple(1000);
+	gb.playMultiple(1000);
+    gab.playMultiple(1000);
+
+	g.insertDataConfig(gab.getDataConfig())
+	g.insertDataConfig(ga.getDataConfig())
+	g.insertDataConfig(gb.getDataConfig())
+    g.createChart();
+
+	
 }
 
-function draw(): void {
-	var c = ga.play();
-	g.addDataPoint("Game A", c)
+export function draw(): void {
+    ga.play();
+    var c = ga.getScore();
+    g.addDataPoint("Game A", c);
 }
+
 setup();
-
-let previousTimeStamp = 0;
-function loop(timestamp): void {
-    if (timestamp - previousTimeStamp > 1000) {
-        draw();
-        previousTimeStamp = timestamp;
-    }
-    window.requestAnimationFrame(loop);
-}
-
-window.requestAnimationFrame(loop);
+// window.requestAnimationFrame(loop);

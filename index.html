@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Parrondo's Paradox</title>
-		<script defer src="./index.bundle.js"></script>
-	</head>
-		<body>
-			<h1>Parrondo's Paradox</h1>
-			<div id="root">
-				<canvas id="game"></canvas>
-			</div>
-		</body>
+    <head>
+        <title>Parrondo's Paradox</title>
+        <script defer src="./index.bundle.js"></script>
+		<script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <h1 class="font-mono text-xl text-center my-4">Parrondo's Paradox</h1>
+
+        <div id="root">
+            <div class="max-w-4xl mx-auto mb-28 grid grid-flow-col grid-cols-3 gap-x-2.5">
+                <div id="GameA" class="mx-1"></div>
+                <div id="GameB" class="mx-1"></div>
+                <div id="GameAandB" class="mx-1"></div>
+            </div>
+            <canvas id="game"></canvas>
+        </div>
+    </body>
 </html>

@@ -18,10 +18,21 @@ class Graph {
 	private genConfig(): void {
 		this.config = {
       		type: "line",
+			title: "f",
       		data: {
 				labels: [...Array(this.numberOfPlays).keys()],
 				datasets: this.dataSets
+			},
+			options: {
+				events: ["click"],
+				plugins: {
+					title: {
+						display: true,
+						text: "More Iterations of the Games"
+					}
+				},
 			}
+
 		}
 	}
 
@@ -32,9 +43,13 @@ class Graph {
 		this.chart.update();
 	}
 
-	createChart(obj: DataConfig){
+	insertDataConfig(obj: DataConfig){
 		this.dataSets.push(obj);
 		this.numberOfPlays = obj.data.length
+	}
+
+	/*  Please insert dataconfig before **/
+	createChart(){
 		this.genConfig();
 		Chart.register(...registerables);
 		this.chart = new Chart(this.root, this.config)
