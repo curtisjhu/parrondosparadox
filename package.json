@@ -1,0 +1,21 @@
+{
+  "name": "parrondosparadox",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "firefox": "firefox index.html",
+    "chrome": "google-chrome index.html",
+    "start": "open index.html",
+    "build": "tsc -b"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.7.14",
+    "chart.js": "^3.9.1"
+  },
+  "dependencies": {
+    "@types/chart.js": "^2.9.37"
+  }
+}
