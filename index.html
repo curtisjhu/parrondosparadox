@@ -2,19 +2,19 @@
 <html>
     <head>
         <title>Parrondo's Paradox</title>
-        <script defer src="./index.bundle.js"></script>
-		<script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            #code {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            #code > img {
+                max-width: 100%;
+            }
+        </style>
     </head>
     <body>
-        <h1 class="font-mono text-xl text-center my-4">Parrondo's Paradox</h1>
-
-        <div id="root">
-            <div class="max-w-4xl mx-auto mb-28 grid grid-flow-col grid-cols-3 gap-x-2.5">
-                <div id="GameA" class="mx-1"></div>
-                <div id="GameB" class="mx-1"></div>
-                <div id="GameAandB" class="mx-1"></div>
-            </div>
-            <canvas id="game"></canvas>
-        </div>
+        <h1 style="font-family: Arial, Helvetica, sans-serif;">Parrondo's Paradox</h1>
+        <div id="code"></div>
+        <script defer src="./index.bundle.js"></script>
     </body>
 </html>

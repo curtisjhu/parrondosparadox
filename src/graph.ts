@@ -8,14 +8,18 @@ class Graph {
 	private numberOfPlays: number;
 	private chart: Chart;
 
-	constructor(){
-		this.root = document.getElementById("game") as HTMLCanvasElement;
+	constructor(node){
+		this.root = node as HTMLCanvasElement;
 		this.dataSets = [];
 		this.numberOfPlays = 0;
-		this.genConfig();
 	}
 
-	private genConfig(): void {
+	insertDataSets(obj: DataConfig) {
+		this.dataSets.push(obj);
+		this.numberOfPlays = Math.max(obj.data.length, this.numberOfPlays);
+	}
+
+	createChart(){
 		this.config = {
       		type: "line",
 			title: "f",
@@ -32,25 +36,7 @@ class Graph {
 					}
 				},
 			}
-
 		}
-	}
-
-	addDataPoint(label: string, score: number){
-		const i = this.chart.data.datasets.findIndex((e) => e.label == label);
-		this.chart.data.datasets[i].data.push(score);
-		this.chart.data.labels.push(++this.numberOfPlays)
-		this.chart.update();
-	}
-
-	insertDataConfig(obj: DataConfig){
-		this.dataSets.push(obj);
-		this.numberOfPlays = obj.data.length
-	}
-
-	/*  Please insert dataconfig before **/
-	createChart(){
-		this.genConfig();
 		Chart.register(...registerables);
 		this.chart = new Chart(this.root, this.config)
 	}
